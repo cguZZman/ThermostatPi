@@ -27,10 +27,12 @@ public class ThermometerController {
 		String[] thermometerList = preferences.get(Constants.PREFERENCE_THERMOMETER_LIST, Constants.EMPTY).split(Constants.COMMA);
 		for (String thermometerData : thermometerList) {
 			String[] data = thermometerData.split(Constants.EQUALS);
-			Thermometer thermometer = new Thermometer(data[0]);
-			thermometer.setValue(getTemperature(data[1], Constants.SCALE_CELSIUS));
-			thermometer.setStatus(Constants.STATUS_ON);
-			list.add(thermometer);
+			if (data.length > 1){
+				Thermometer thermometer = new Thermometer(data[0]);
+				thermometer.setValue(getTemperature(data[1], Constants.SCALE_CELSIUS));
+				thermometer.setStatus(Constants.STATUS_ON);
+				list.add(thermometer);
+			}
 		}
 		return list;
 	}
